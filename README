@@ -1,0 +1,74 @@
+# Envoi d'Emails depuis un Fichier Excel
+
+Ce projet permet d'envoyer des emails personnalisés à une liste d'adresses email contenue dans un fichier Excel. Le script prend en charge la validation des adresses email et permet de personnaliser le contenu des emails avec du texte en couleur, en gras, et souligné.
+
+## Fonctionnalités
+
+- **Validation des adresses email** : Le script vérifie que chaque adresse email est valide avant d'envoyer un email.
+- **Personnalisation du texte** : Le texte de l'email peut inclure des sections en gras, en couleur, ou souligné en utilisant du HTML.
+- **Envoi d'attachements** : Possibilité d'envoyer des fichiers en pièce jointe.
+- **Journalisation** : Les tentatives d'envoi et les erreurs sont enregistrées dans des fichiers de log (`email_sent.log` et `email_errors.log`).
+
+## Prérequis
+
+- Python 3.x
+- Bibliothèques Python : `pandas`, `smtplib`, `email`, `argparse`, `logging`, `re`
+
+Vous pouvez installer les dépendances nécessaires avec pip :
+
+pip install pandas
+pip install -r requirements.txt
+
+## Utilisation
+
+1. **Préparer le fichier Excel** :
+    - Le fichier Excel doit contenir une colonne `mail` avec les adresses email des destinataires.
+    - Une colonne `PUSH` doit contenir un 'x' pour les lignes où un email doit être envoyé.
+    - Une colonne `Genre` est utilisée pour personnaliser la salutation (valeurs possibles : 'M' pour Monsieur, 'F' pour Madame).
+
+2. **Créer le fichier de configuration d'authentification (`auth_file`)** :
+    - Ce fichier doit être au format JSON et contenir votre email et mot de passe pour l'envoi des emails.
+    - Exemple :
+      ```json
+      {
+          "email": "votre_adresse_email@example.com",
+          "password": "votre_mot_de_passe"
+      }
+      ```
+
+3. **Préparer le fichier template du corps de l'email (`body_file`)** :
+    - Ce fichier doit être en format HTML et peut inclure du texte en couleur, gras, souligné, etc.
+    - Exemple de contenu :
+      ```html
+      <p>Cher client,</p>
+      <p>Nous tenons à vous informer que <span style="color:red;">votre compte</span> a été mis à jour avec succès.</p>
+      ```
+
+4. **Exécuter le script** :
+    - Utilisez la ligne de commande pour exécuter le script en spécifiant les chemins des fichiers nécessaires et le sujet de l'email.
+    - Exemple de commande :
+      ```
+      python3 send_emails.py excel_path.xlsx auth_file.json body_file.html --subject "Mise à jour de votre compte" --attachments "fichier1.pdf" "fichier2.jpg"
+      ```
+
+## Paramètres
+
+- `excel_path` : Chemin vers le fichier Excel contenant les adresses email.
+- `auth_file` : Chemin vers le fichier JSON contenant les informations de connexion (email, mot de passe).
+- `body_file` : Chemin vers le fichier contenant le corps de l'email au format HTML.
+- `--subject` : Sujet de l'email (par défaut "Default Subject").
+- `--attachments` : Chemin(s) vers les fichiers à joindre à l'email (facultatif).
+
+## Journalisation
+
+- Les emails envoyés sont enregistrés dans `email_sent.log`.
+- Les erreurs lors de l'envoi des emails sont enregistrées dans `email_errors.log`.
+
+## Exemple
+
+Supposons que vous ayez un fichier Excel `contacts.xlsx`, un fichier JSON `auth.json` pour l'authentification, et un fichier HTML `body_template.html` pour le corps de l'email :
+```
+python3 send_emails.py contacts.xlsx auth.json body_template.html --subject "Informations importantes" --attachments "document.pdf"
+```
+shell
+Copy code
