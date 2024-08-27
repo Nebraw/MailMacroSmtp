@@ -66,7 +66,7 @@ pip install -r requirements.txt
 
 ## Exemple
 
-Supposons que vous ayez un fichier Excel `contacts.xlsx`, un fichier JSON `auth.json` pour l'authentification, et un fichier HTML `body_template.html` pour le corps de l'email :
+Supposons que vous ayez un fichier Excel `contacts.xlsx`, un fichier JSON `auth.json` pour l'authentification, et un fichier HTML `body_template.txt/html` pour le corps de l'email :
 ```
 python3 send_emails.py contacts.xlsx auth.json body_template.html --subject "Informations importantes" --attachments "document.pdf"
 ```
