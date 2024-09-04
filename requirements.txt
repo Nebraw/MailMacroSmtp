@@ -1,5 +1,4 @@
 pandas
-smtplib
 email
 argparse
 logging

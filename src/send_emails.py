@@ -76,21 +76,25 @@ def main(excel_file, auth_file, subject, body_file, attachment_paths=None):
     for index, row in df_filtered.iterrows():
         if pd.notna(row['mail']) and is_valid_email(row['mail']):
             receiver_email = row['mail']
-            salutation = "Monsieur" if row['Genre'] == 'M' else "Madame"
+            
+            
+            salutation = ""
+            if row['Genre'] == 'M':
+                salutation = f"Monsieur {row["Nom"]}"
+            if row['Genre'] == 'F':
+                salutation = f"Madame {row["Nom"]}"
 
             # Incorporation du template du corps de l'email
             body = f"""
             <html>
             <body>
-                <p><b>{salutation}</b>,</p>
+                <p>Bonjour {salutation} ,</p>
                 <p>{body_template}</p>
-                <p><u>Merci de votre attention.</u></p>
             </body>
             </html>
             """
-
             send_email(sender_email, sender_password, receiver_email, subject, body, attachment_paths)
-            time.sleep(2) 
+            time.sleep(4) 
         else:
             print(f"Skipping row {index}: Invalid or missing email address.")
 

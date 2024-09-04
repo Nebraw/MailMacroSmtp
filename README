@@ -12,11 +12,10 @@ Ce projet permet d'envoyer des emails personnalisés à une liste d'adresses ema
 ## Prérequis
 
 - Python 3.x
-- Bibliothèques Python : `pandas`, `smtplib`, `email`, `argparse`, `logging`, `re`
+- Bibliothèques Python : `pandas`, `email`, `argparse`, `logging`, `re`
 
 Vous pouvez installer les dépendances nécessaires avec pip :
 
-pip install pandas
 pip install -r requirements.txt
 
 ## Utilisation
@@ -48,7 +47,7 @@ pip install -r requirements.txt
     - Utilisez la ligne de commande pour exécuter le script en spécifiant les chemins des fichiers nécessaires et le sujet de l'email.
     - Exemple de commande :
       ```
-      python3 send_emails.py excel_path.xlsx auth_file.json body_file.html --subject "Mise à jour de votre compte" --attachments "fichier1.pdf" "fichier2.jpg"
+      python3 src\send_emails.py excel_path.xlsx auth_file.json body_file.html --subject "Mise à jour de votre compte" --attachments "fichier1.pdf" "fichier2.jpg"
       ```
 
 ## Paramètres
